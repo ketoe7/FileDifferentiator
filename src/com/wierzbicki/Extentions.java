@@ -26,7 +26,9 @@ public class Extentions implements Map<String, Extention>{
                 for(int i=0; i<parts.length-1; i++){
                     magicNumbers[i] = parts[i+1];
                 }
-                System.out.println("Imported ext. " + parts[0] + " with magicNumbers: " + Arrays.toString(magicNumbers));
+                /* Testing purpose only
+                    System.out.println("Imported ext. " + parts[0] + " with magicNumbers: " + Arrays.toString(magicNumbers));
+                */
                 extentions.put(parts[0], new Extention(parts[0], magicNumbers));
                 line = reader.readLine();
             }
