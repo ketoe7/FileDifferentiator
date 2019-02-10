@@ -1,10 +1,9 @@
 package com.wierzbicki;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
 
 
 public class Extentions implements Map<String, Extention>{
@@ -13,7 +12,36 @@ public class Extentions implements Map<String, Extention>{
     private  static Map<String, Extention> extentions = new HashMap<String, Extention>();
 
 
+    // Reading all extentions and their magic numbers from the text file 'extentions.txt'
+    static{
 
+        BufferedReader reader = null;
+        try{
+            reader = new BufferedReader(new FileReader("extentions.txt"));
+            String line = reader.readLine();
+            while(line!=null){
+
+                String[] parts = line.split(",");
+                String[] magicNumbers = new String[parts.length-1];
+                for(int i=0; i<parts.length-1; i++){
+                    magicNumbers[i] = parts[i+1];
+                }
+                System.out.println("Imported ext. " + parts[0] + " with magicNumbers: " + Arrays.toString(magicNumbers));
+                extentions.put(parts[0], new Extention(parts[0], magicNumbers));
+                line = reader.readLine();
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
 
 
 
